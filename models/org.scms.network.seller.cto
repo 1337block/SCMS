@@ -1,0 +1,135 @@
+namespace org.scms.network.seller
+
+import org.scms.network.product.Product
+import org.scms.network.distributor.Distributor
+
+
+concept RejProductsList {
+  o String product_ID
+  o String distributor_ID
+  o String reason
+}
+
+concept ReqProductList {
+  o String product_ID
+  o String seller_ID
+  o String distributor_ID
+  o String numberOfItems
+  o String pricePerItem
+  o String deliveryEndDate
+}
+
+concept ProductList {
+  o String product_ID
+  o String distributor_ID
+  o String numberOfItems
+}
+
+concept RejDistributorList {
+  o String distributor_ID
+  o String reason
+}
+
+asset Seller identified by seller_ID {
+  o String seller_ID
+  o String seller_name
+  o String state
+  o String district
+  o String gst_number
+  o String email
+  o String phone_number
+  o String fax_number
+  o String address
+  o String status
+  o ProductList[] products
+  o RejProductsList[] rejProductsList
+  o ReqProductList[] reqProductList
+  o RejDistributorList[] rejDistributorList
+  --> Distributor[] distributorsList
+  --> Distributor[] reqDistributorList
+}
+
+transaction Registerseller {
+  o String seller_name
+  o String state
+  o String district
+  o String gst_number
+  o String email
+  o String phone_number
+  o String fax_number
+  o String address  
+}
+
+transaction AddDistributor {
+  o String seller_ID
+  o String distributor_ID
+}
+
+event DistributorAdd {
+  o String seller_ID
+  o String distributor_ID
+}
+
+transaction ApproveAddDistributor {
+  o String seller_ID
+  o String distributor_ID
+}
+
+event DistributorAddApproved {
+  o String seller_ID
+}
+
+transaction RejectAddDistributor {
+  o String seller_ID
+  o String distributor_ID
+  o String reason
+}
+
+event AddDistributorRejected {
+  o String seller_ID
+  o String distributor_ID
+  o String reason
+}
+
+transaction ReqToAddProductToSeller {
+  o String product_ID
+  o String distributor_ID
+  o String seller_ID
+  o String numberOfItems
+  o String pricePerItem
+  o String deliveryEndDate
+}
+
+event AddProductToSeller {
+  o String product_ID
+  o String seller_ID
+  o String distributor_ID
+  o String numberOfItems
+  o String pricePerItem  
+}
+
+transaction ApproveToAddProductToSeller {
+  o String seller_ID
+  o String distributor_ID
+  o String product_ID
+  o String numberOfItems
+}
+
+event AddProductToSellerApproved {
+  o String product_ID
+  o String distributor_ID
+  o String seller_ID
+}
+
+transaction RejectToAddProductToSeller {
+  o String product_ID
+  o String seller_ID
+  o String distributor_ID
+  o String reason
+}
+
+event AddProductToSellerRejected {
+  o String product_ID
+  o String distributor_ID
+  o String reason
+}

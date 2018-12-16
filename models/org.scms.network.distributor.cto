@@ -1,0 +1,126 @@
+namespace org.scms.network.distributor
+
+import org.scms.network.product.Product
+import org.scms.network.seller.Seller
+
+enum Status {
+// NOT USED ANYWHERE
+  o Pending
+  o Approved
+  o Rejected
+}
+
+concept RejProductList {
+  o String product_ID
+  o String reason
+}
+
+concept RejSellerList {
+  o String seller_ID
+  o String reason
+}
+
+concept ReqProductList {
+  o String product_ID
+  o String distributor_ID
+  o String numberOfItems
+  o String deliveryEndDate
+}
+
+concept ProductList {
+  o String product_ID
+  o String numberOfItems
+}
+
+concept ReqProductListFromSeller {
+  o String seller_ID
+  o String distributor_ID
+  o String product_ID
+  o String numberOfItems
+  o String pricePerItem
+  o String deliveryEndDate
+}
+
+concept RejProductListFromSeller {
+  o String seller_ID
+  o String distributor_ID
+  o String product_ID
+  o String reason
+}
+
+concept ApproveProductListForSeller {
+  o String seller_ID
+  o String distributor_ID
+  o String product_ID
+  o String numberOfItems
+}
+
+asset Distributor identified by distributor_ID {
+  o String distributor_ID
+  o String distributor_name
+  o String distributor_registration_number
+  o String gst_registration_number
+  o String brand_name
+  o String state
+  o String email
+  o String phone_number
+  o String fax_number  
+  o String additional_documents optional 
+  o String status
+  o RejProductList[] rejProductList
+  o ReqProductList[] reqProductList
+  o ProductList[] products
+  o ReqProductListFromSeller[] reqProductListFromSeller
+  o RejProductListFromSeller[] rejProductListFromSeller
+  o ApproveProductListForSeller[] approveProductListForSeller
+  --> Seller[] reqSellerList
+  o RejSellerList[] rejSellerList
+}
+
+transaction RegisterDistributor {
+  o String distributor_name
+  o String distributor_registration_number
+  o String gst_registration_number
+  o String brand_name
+  o String state
+  o String email
+  o String phone_number
+  o String fax_number
+  o String additional_documents 
+}
+
+transaction AddProductToDistributor {
+  o String product_ID
+  o String distributor_ID
+  o String numberOfItems
+  o String deliveryEndDate
+}
+
+event ProductAddToDistributor {
+  o String product_ID
+  o String distributor_ID
+  o String numberOfItems
+}
+
+transaction ApproveAddProductToDistributor {
+  o String product_ID
+  o String distributor_ID
+  o String numberOfItems
+}
+
+event AddProductToDistributorApproved {
+  o String product_ID
+  o String distributor_ID
+}
+
+transaction RejectAddProductToDistributor {
+  o String product_ID
+  o String distributor_ID
+  o String reason
+}
+
+event AddProductToDistributorRejected {
+  o String product_ID
+  o String distributor_ID
+  o String reason
+}

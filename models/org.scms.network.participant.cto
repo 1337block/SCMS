@@ -1,0 +1,17 @@
+namespace org.scms.network.participant
+
+abstract participant SCMSParticipant identified by participantKey {
+  o String participantKey
+}
+
+participant DEO extends SCMSParticipant {
+  o String department
+}
+
+participant PaymentApprover extends SCMSParticipant {
+  o String department
+}
+
+participant RegistryApprover extends SCMSParticipant {
+  o String department
+}

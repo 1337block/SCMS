@@ -1,0 +1,79 @@
+namespace org.scms.network.product
+
+concept RejectReason {
+  o String product_ID
+  o String reason
+}
+
+enum Category {
+  o SportsShoes
+  o Pampootie
+  o CasualShoes
+  o FormalShoes
+  o Sandals
+  o FlipFlops
+  o Loafers
+  o Boots
+  o RunningShoes
+  o Sneakers
+  o Flats
+  o Heels
+  o Wedges
+}
+
+enum IdealFor {
+  o Men
+  o Women
+}
+
+enum Status {
+  o Pending
+  o Approved
+  o Rejected
+}
+
+asset Product identified by product_ID {
+  o String product_ID
+  o Category category
+  o String brand_name
+  o IdealFor ideal_for
+  o Status status
+  o String price 
+  o String size
+  o String color
+  o String description optional
+  o RejectReason[] rejectReasonList
+}
+
+transaction RegisterProduct {
+  o String product_ID
+  o Category category
+  o String brand_name
+  o IdealFor ideal_for
+  o String price
+  o String size
+  o String color
+  o String description optional
+}
+
+event ProductApprovePending {
+  o String product_ID
+}
+
+transaction ApproveProduct {
+  o String product_ID
+}
+
+event ProductApproved {
+  o String product_ID
+}
+
+transaction RejectProduct {
+  o String product_ID
+  o String reason
+}
+
+event ProductRejected  {
+  o String product_ID
+  o String reason
+}
