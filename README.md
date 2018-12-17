@@ -10,7 +10,7 @@ so using HYPERLEDGER FABRIC we build a system that can store each and every prod
 ___
 # WORK FLOW :
 * OK !! now We assumed that there is a BRAND for footwear that is NIKE;
-* NIKE has a product and suppose this product has some faulty . So NIKE has wright to REJECT this product or APPROVE. So Product has 3 status APPROVE REJECT PENDING(When the product is Register for APPROVE before it show the status PENDING). 
+* NIKE has a product and suppose this product has some faulty . So NIKE has wright to REJECT this product or APPROVE. So Product has 3 status APPROVE, REJECT, PENDING(When the product is Register for APPROVE before it show the status PENDING). 
 * OK after PRODUCT APPROVED by NIKE. It can available to distribut among DISTRIBUTOR and then SELLER
 * Distributor or Seller can Register themselves freely their is no Approve or Reject. Once feel the details for registration after it shows status as "REGISTERED".
 * Once Distributor Registered then they can able to add product from NIKE.
@@ -19,17 +19,17 @@ ___
 
 * During the Add Product to distributor first they Request NIKE to add their product after Approve by NIKE it can available to Distributor.
 * So NIKE has full wrights to REJECT ADD PRODUCT TO DISTRIBUTOR.
-* after Approve from NIKE after that product will be available for SELLER.
+* After Approve from NIKE, this product will be available for SELLER. Otherwise not and it will show Distributor Rejected Products List.
 
 ##### ADD PRODUCT TO SELLER:
 
-* OK !! after approve from NIKE product is now available for SELLER.
+* OK !! after approve from NIKE, Distributor has this product and now it will available for SELLER.
 * Now SELLER  can add this product by sending a request to DISTRIBUTOR. 
-* So as NIKE, DISTRIBUTOR has wrights to REJECT TO ADD PRODUCT FOR SELLER. If it is approve then it will available in SELLER product list.
+* So as NIKE, DISTRIBUTOR has wrights to REJECT TO ADD PRODUCT FOR SELLER. If it is approve then it will available in SELLER product list. Otherwise same as Distributor it will show in Seller Rejected Product List.
 ___
 # DEVELOPMENT ENVIRONMENT 
 ##### NOTE:
-WE made this Product only for HYPERLEDGER-COMPOSER
+WE made this Product only for HYPERLEDGER-COMPOSER.
 
 ### Installation of pre-reqs
 ```sh
