@@ -28,6 +28,7 @@ concept ReqProductList {
 }
 concept ProductList {
   o String product_ID
+  o String numberOfItemsOrdered
   o String numberOfItemsApproved
   o String pricePerItem
   o Integer pendingNumberOfItems
