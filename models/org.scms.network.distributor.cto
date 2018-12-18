@@ -26,10 +26,11 @@ concept ReqProductList {
   o String numberOfItems
   o String deliveryEndDate
 }
-
 concept ProductList {
   o String product_ID
-  o String numberOfItems
+  o String numberOfItemsApproved
+  o String pricePerItem
+  o Integer pendingNumberOfItems
 }
 
 concept ReqProductListFromSeller {
@@ -105,7 +106,8 @@ event ProductAddToDistributor {
 transaction ApproveAddProductToDistributor {
   o String product_ID
   o String distributor_ID
-  o String numberOfItems
+  o String pricePerItem
+  o String numberOfItemsApproved
 }
 
 event AddProductToDistributorApproved {

@@ -50,9 +50,9 @@ transaction RegisterProduct {
   o Category category
   o String brand_name
   o IdealFor ideal_for
-  o String price
   o String size
   o String color
+  o String price
   o String description optional
 }
 
