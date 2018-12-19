@@ -12,23 +12,48 @@ concept RejProductsList {
 
 concept ReqProductList {
   o String product_ID
-  o String seller_ID
   o String distributor_ID
-  o String numberOfItems
-  o String pricePerItem
+  o Integer numberOfItems
   o String deliveryEndDate
+}
+
+concept ReqApproveProductList {
+  o String product_ID
+  o String distributor_ID
+  o Integer numberOfItemsApproved
+ // o String numberOfItemsPending
+  o Integer pricePerItem
+  o Integer additionalCharges
+  o Integer transportationCharges
+  o Integer totalPayment
+  o String payment_ID
+  o String paymentStatus
 }
 
 concept ProductList {
   o String product_ID
   o String distributor_ID
-  o String numberOfItems
+  o Integer numberOfItems
+  o Integer pricePerItem
 }
 
 concept RejDistributorList {
   o String distributor_ID
   o String reason
 }
+
+concept Payments {
+  o String distributor_ID
+  o String payment_ID
+  o String demandDraft_or_RTGSNo
+  o Integer amount_deposited
+  o String bank_name
+  o String branch_address
+  o String issuing_bank
+  o String issue_Date
+  o String status
+}
+
 
 asset Seller identified by seller_ID {
   o String seller_ID
@@ -41,12 +66,14 @@ asset Seller identified by seller_ID {
   o String fax_number
   o String address
   o String status
+  o ReqApproveProductList[] reqApproveProductList
   o ProductList[] products
   o RejProductsList[] rejProductsList
   o ReqProductList[] reqProductList
   o RejDistributorList[] rejDistributorList
   --> Distributor[] distributorsList
   --> Distributor[] reqDistributorList
+  o Payments[] payments
 }
 
 transaction Registerseller {
@@ -93,10 +120,9 @@ event AddDistributorRejected {
 
 transaction ReqToAddProductToSeller {
   o String product_ID
-  o String distributor_ID
   o String seller_ID
-  o String numberOfItems
-  o String pricePerItem
+  o String distributor_ID
+  o Integer numberOfItems
   o String deliveryEndDate
 }
 
@@ -104,21 +130,28 @@ event AddProductToSeller {
   o String product_ID
   o String seller_ID
   o String distributor_ID
-  o String numberOfItems
-  o String pricePerItem  
+  o Integer numberOfItems
+  o String deliveryEndDate
 }
 
-transaction ApproveToAddProductToSeller {
+transaction ReqApproveAddProductToSeller {
+  o String product_ID
   o String seller_ID
   o String distributor_ID
-  o String product_ID
-  o String numberOfItems
+  o Integer numberOfItemsApproved
+  o Integer pricePerItem
+  o Integer additionalCharges
+  o Integer transportationCharges
 }
 
-event AddProductToSellerApproved {
+event ReqAddProductToSellerApproved {
   o String product_ID
   o String distributor_ID
-  o String seller_ID
+  o Integer numberOfItemsApproved
+  o Integer pricePerItem
+  o Integer additionalCharges
+  o Integer transportationCharges
+
 }
 
 transaction RejectToAddProductToSeller {
@@ -132,4 +165,57 @@ event AddProductToSellerRejected {
   o String product_ID
   o String distributor_ID
   o String reason
+}
+
+// Payment
+
+transaction Payment {
+  o String seller_ID
+  o String distributor_ID
+  o String payment_ID
+  o String demandDraft_or_RTGSNo
+  o Integer amount_deposited
+  o String bank_name
+  o String branch_address
+  o String issuing_bank
+  o String issue_Date
+}
+
+event PaymentPending {
+  o String payment_ID
+  o String seller_ID
+  o String distributor_ID
+  o String demandDraft_or_RTGSNo
+  o Integer amount_deposited
+}
+
+transaction ApprovePayment {
+  o String payment_ID
+  o String seller_ID
+  o String distributor_ID
+  o String demandDraft_or_RTGSNo
+  o Integer amount_deposited
+}
+event  PaymentApproved {
+  o String payment_ID
+  o String seller_ID
+  o String distributor_ID
+  o String demandDraft_or_RTGSNo
+  o Integer amount_deposited
+}
+
+transaction RejectPayment {
+  o String payment_ID
+  o String seller_ID
+  o String distributor_ID
+  o String demandDraft_or_RTGSNo
+  o String reason
+}
+
+event PaymentRejected {
+  o String payment_ID
+  o String seller_ID
+  o String distributor_ID
+  o String demandDraft_or_RTGSNo
+  o String reason  
 }

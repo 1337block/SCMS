@@ -28,18 +28,17 @@ concept ReqProductList {
 }
 concept ProductList {
   o String product_ID
-  o String numberOfItemsOrdered
-  o String numberOfItemsApproved
-  o String pricePerItem
+ // o String numberOfItemsOrdered
+  o Integer numberOfItemsApproved
+  o Integer pricePerItem
   o Integer pendingNumberOfItems
 }
 
 concept ReqProductListFromSeller {
   o String seller_ID
-  o String distributor_ID
   o String product_ID
-  o String numberOfItems
-  o String pricePerItem
+  o String distributor_ID
+  o Integer numberOfItems
   o String deliveryEndDate
 }
 
@@ -50,11 +49,14 @@ concept RejProductListFromSeller {
   o String reason
 }
 
-concept ApproveProductListForSeller {
+concept ReqApproveProductListForSeller {
   o String seller_ID
   o String distributor_ID
   o String product_ID
-  o String numberOfItems
+ // o String numberOfItemsPending
+  o Integer totalPayment
+  o String paymentID
+  o String paymentStatus
 }
 
 asset Distributor identified by distributor_ID {
@@ -74,7 +76,7 @@ asset Distributor identified by distributor_ID {
   o ProductList[] products
   o ReqProductListFromSeller[] reqProductListFromSeller
   o RejProductListFromSeller[] rejProductListFromSeller
-  o ApproveProductListForSeller[] approveProductListForSeller
+  o ReqApproveProductListForSeller[] reqApproveProductListForSeller
   --> Seller[] reqSellerList
   o RejSellerList[] rejSellerList
 }
@@ -94,26 +96,26 @@ transaction RegisterDistributor {
 transaction AddProductToDistributor {
   o String product_ID
   o String distributor_ID
-  o String numberOfItems
+  o Integer numberOfItems
   o String deliveryEndDate
 }
 
 event ProductAddToDistributor {
   o String product_ID
   o String distributor_ID
-  o String numberOfItems
+  o Integer numberOfItems
 }
 
 transaction ApproveAddProductToDistributor {
   o String product_ID
   o String distributor_ID
-  o String pricePerItem
-  o String numberOfItemsApproved
+  o Integer numberOfItemsApproved
 }
 
 event AddProductToDistributorApproved {
   o String product_ID
   o String distributor_ID
+  o Integer numberOfItemsApproved
 }
 
 transaction RejectAddProductToDistributor {

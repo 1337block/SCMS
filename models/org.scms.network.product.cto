@@ -38,7 +38,9 @@ asset Product identified by product_ID {
   o String brand_name
   o IdealFor ideal_for
   o Status status
-  o String price 
+  o Integer msrp
+  o Integer salesTax
+  o Integer totalPrice 
   o String size
   o String color
   o String description optional
@@ -52,7 +54,8 @@ transaction RegisterProduct {
   o IdealFor ideal_for
   o String size
   o String color
-  o String price
+  o Integer msrp
+  o Integer salesTax
   o String description optional
 }
 
