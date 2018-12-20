@@ -54,6 +54,12 @@ concept Payments {
   o String status
 }
 
+concept RejectPaymentList {
+  o String payment_ID
+  o String distributor_ID
+  o String demandDraft_or_RTGSNo
+  o String reason 
+}
 
 asset Seller identified by seller_ID {
   o String seller_ID
@@ -74,6 +80,7 @@ asset Seller identified by seller_ID {
   --> Distributor[] distributorsList
   --> Distributor[] reqDistributorList
   o Payments[] payments
+  o RejectPaymentList[] rejectPaymentList
 }
 
 transaction Registerseller {
@@ -193,6 +200,7 @@ transaction ApprovePayment {
   o String payment_ID
   o String seller_ID
   o String distributor_ID
+  o String product_ID
   o String demandDraft_or_RTGSNo
   o Integer amount_deposited
 }

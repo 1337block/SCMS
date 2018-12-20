@@ -23,7 +23,7 @@ concept RejSellerList {
 concept ReqProductList {
   o String product_ID
   o String distributor_ID
-  o String numberOfItems
+  o Integer numberOfItems
   o String deliveryEndDate
 }
 concept ProductList {
@@ -55,10 +55,15 @@ concept ReqApproveProductListForSeller {
   o String product_ID
  // o String numberOfItemsPending
   o Integer totalPayment
-  o String paymentID
+  o String payment_ID
   o String paymentStatus
 }
-
+concept PaymentList {
+  o String payment_ID
+  o String seller_ID
+  o Integer amount_deposited
+  o String demandDraft_or_RTGSNo
+}
 asset Distributor identified by distributor_ID {
   o String distributor_ID
   o String distributor_name
@@ -79,6 +84,8 @@ asset Distributor identified by distributor_ID {
   o ReqApproveProductListForSeller[] reqApproveProductListForSeller
   --> Seller[] reqSellerList
   o RejSellerList[] rejSellerList
+  o PaymentList [] paymentList
+
 }
 
 transaction RegisterDistributor {
