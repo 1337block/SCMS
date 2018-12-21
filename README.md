@@ -6,26 +6,36 @@ ___
 # OVERVIEW 
 
 Here We create a Supply Chain Managment System for FOOTWEAR. Already know that Blockchain is a digital ledger that records transactions or other data over time. In a much simpler way, It offers a way for people who do not know or trust each other to create a record of who owns what, that will compel the assent of everyone concerned. It is a way of making and preserving truths.
-so using HYPERLEDGER FABRIC we build a system that can store each and every product details. Along with BRAND NAME , PRICE and so on. so users can easily identified product details along with Distributor Name and Seller Details. So users can easily identified that product is original/NOT or what is the Wright price and so on. 
+so using HYPERLEDGER FABRIC we build a system that can store each and every product details. Along with BRAND NAME , PRICE and so on. So users can easily identified product details along with Distributor Name and Seller Details. So users can easily identified that product is original/NOT or what is the right price and so on. 
 ___
 # WORK FLOW :
+
 * OK !! now We assumed that there is a BRAND for footwear that is NIKE;
-* NIKE has a product and suppose this product has some faulty . So NIKE has wright to REJECT this product or APPROVE. So Product has 3 status APPROVE, REJECT, PENDING(When the product is Register for APPROVE before it show the status PENDING). 
-* OK after PRODUCT APPROVED by NIKE. It can available to distribut among DISTRIBUTOR and then SELLER
-* Distributor or Seller can Register themselves freely their is no Approve or Reject. Once feel the details for registration after it shows status as "REGISTERED".
+* NIKE has a product and suppose this product has some faulty . So NIKE has right to REJECT this product or APPROVE. So Product has 3 status APPROVE, REJECT, PENDING(When the product is Register for APPROVE/REJECT before it show the product status is PENDING). 
+* OK after PRODUCT APPROVED by NIKE. It can available to distribut among DISTRIBUTOR and then SELLER.
+* Distributor or Seller can Register themselves freely, their is no Approve or Reject. Once feel the details for registration after it will show status as "REGISTERED".
 * Once Distributor Registered then they can able to add product from NIKE.
 
 ##### ADD PRODUCT TO DISTRIBUTOR:
 
-* During the Add Product to distributor first they Request NIKE to add their product after Approve by NIKE it can available to Distributor.
-* So NIKE has full wrights to REJECT ADD PRODUCT TO DISTRIBUTOR.
+* During the Add Product To Distributor first they Request NIKE to add their product after Approve by NIKE it can available to Distributor.
+* So NIKE has full rights to REJECT ADD PRODUCT TO DISTRIBUTOR.
 * After Approve from NIKE, this product will be available for SELLER. Otherwise not and it will show Distributor Rejected Products List.
 
 ##### ADD PRODUCT TO SELLER:
 
-* OK !! after approve from NIKE, Distributor has this product and now it will available for SELLER.
+* OK !! after approve from NIKE, Distributor has some products and now it will available for SELLER.
 * Now SELLER  can add this product by sending a request to DISTRIBUTOR. 
-* So as NIKE, DISTRIBUTOR has wrights to REJECT TO ADD PRODUCT FOR SELLER. If it is approve then it will available in SELLER product list. Otherwise same as Distributor it will show in Seller Rejected Product List.
+* So as NIKE, DISTRIBUTOR has rights to REJECT TO ADD PRODUCT FOR SELLER. If it is approve then it will available in SELLER product list. Otherwise same as Distributor it will show in Seller Rejected Product List.
+#### Payment Section 
+###### Product
+* Every Product has own price and the price would be:
+``ProductPrice = MSRP(Manufacturer's Suggested Retail Price) + (MSRP * SalesTax) / 100.``
+###### Distributor
+* When Distributor Requested To Add Product that time Distributor doesn't set the Product Price. It's automatically set once the product has Approved for Distributor. 
+###### Seller
+*  When Seller Requested for Products that time Seller also Doesn't set the Product Price it will automatically set when Distributor Approve Product. And that time Product Price Changed and it would be: 
+``PricePerItem = ((ProductPrice * NumberOfItemsApproved) + (ProductPrice * NumberOfItemsApproved * additionalCharges)/100 + TransportaionCharges) / NumberOfItemsApproved``
 ___
 # DEVELOPMENT ENVIRONMENT 
 ##### NOTE:
